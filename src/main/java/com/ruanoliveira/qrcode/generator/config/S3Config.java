@@ -1,8 +1,6 @@
 package com.ruanoliveira.qrcode.generator.config;
 
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.annotation.Bean;
-// import org.springframework.context.annotation.Configuration;
 
 import software.amazon.awssdk.auth.credentials.AwsBasicCredentials;
 import software.amazon.awssdk.auth.credentials.StaticCredentialsProvider;
@@ -23,8 +21,8 @@ public class S3Config {
 
     // @Bean
     public S3Client s3Client() {
-        if (accessKeyId != null && !accessKeyId.isEmpty() && 
-            secretAccessKey != null && !secretAccessKey.isEmpty()) {
+        if (accessKeyId != null && !accessKeyId.isEmpty() &&
+                secretAccessKey != null && !secretAccessKey.isEmpty()) {
             // Usar credenciais específicas se fornecidas
             AwsBasicCredentials awsCredentials = AwsBasicCredentials.create(accessKeyId, secretAccessKey);
             return S3Client.builder()
@@ -38,4 +36,4 @@ public class S3Config {
                     .build();
         }
     }
-} 
+}

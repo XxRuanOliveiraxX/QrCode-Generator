@@ -1,11 +1,14 @@
 package com.ruanoliveira.qrcode.generator.controller;
 
+import java.io.IOException;
+
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.google.zxing.WriterException;
 import com.ruanoliveira.qrcode.generator.dto.QrCodeGenerateRequest;
 import com.ruanoliveira.qrcode.generator.dto.QrCodeGenerateResponse;
 import com.ruanoliveira.qrcode.generator.service.QrCodeGeneratorService;
@@ -25,7 +28,7 @@ public class QrCodeController {
         try {
             QrCodeGenerateResponse response = this.qrCodeGeneratorService.generateAndUploadQrCode(request.text());
             return ResponseEntity.ok(response);
-        } catch (Exception e) {
+        } catch (WriterException | IOException e) {
             System.out.println(e);
             return ResponseEntity.internalServerError().build();
         }
